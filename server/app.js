@@ -1,28 +1,29 @@
 import express from "express";
-
 import fileUpload from "express-fileupload";
-import path from "path";
-import { dirname } from "path";
-import { fileURLToPath } from "url";
 
-import postRoutes from "./routes/posts.routes.js";
+// Routes
+import postsRoutes from "./routes/posts.routes.js";
+
+//variables
+import { dirname, join } from "path";
+import { fileURLToPath } from "url";
+import { log } from "console";
 
 const app = express();
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
+// middlwares
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-
 app.use(
   fileUpload({
-    tempFileDir: "./upload",
     useTempFiles: true,
+    tempFileDir: "./upload",
   })
 );
 
-app.use(express.static(path.join(__dirname, "../client/build")));
+// routes
+app.use(postsRoutes);
 
-// Routes
-app.use("/api", postRoutes);
+app.use(express.static(join(__dirname, "../client/build")));
 
-export { app };
+export default app;
