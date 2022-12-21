@@ -8,10 +8,9 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "dev": "nodemon server --watch server",
-    "debug": "nodemon --inspect server --watch server",
-    "build:frontend": "npm run build --prefix client",
-    "start": "node server"
+    "build": "cd client && npm run build",
+    "install-client": "cd client && npm install",
+    "heroku-postbuild": "npm run install-client && npm run build"
   },
   "keywords": [],
   "author": "",

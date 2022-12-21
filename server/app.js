@@ -8,7 +8,6 @@ import loginRouter from "./routes/login.routes.js";
 //variables
 import { dirname, join } from "path";
 import { fileURLToPath } from "url";
-import { log } from "console";
 
 const app = express();
 const __dirname = dirname(fileURLToPath(import.meta.url));
