@@ -24,6 +24,6 @@ app.use(
 // routes
 app.use(postsRoutes);
 
-app.use(express.static(join(__dirname, "../client/build")));
+app.set("views", join(__dirname, "../client/build"));
 
 export default app;
