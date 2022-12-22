@@ -26,4 +26,10 @@ app.use(postsRoutes);
 
 app.set("views", join(__dirname, "../client/build"));
 
+//Static files
+
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static("client/build"));
+}
+
 export default app;
