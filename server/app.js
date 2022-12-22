@@ -1,29 +1,36 @@
 import express from "express";
-import morgan from "morgan";
 import fileUpload from "express-fileupload";
-import path from "path";
-import { dirname } from "path";
-import { fileURLToPath } from "url";
 
-import postRoutes from "./routes/posts.routes.js";
+// Routes
+import postsRoutes from "./routes/posts.routes.js";
+
+//variables
+import { dirname, join } from "path";
+import { fileURLToPath } from "url";
+import { log } from "console";
 
 const app = express();
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
-app.use(morgan("dev"));
+// middlwares
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-
 app.use(
   fileUpload({
-    tempFileDir: "./upload",
     useTempFiles: true,
+    tempFileDir: "./upload",
   })
 );
 
-app.use(express.static(path.join(__dirname, "../client/build")));
+// routes
+app.use(postsRoutes);
 
-// Routes
-app.use("/api", postRoutes);
+app.set("views", join(__dirname, "../client/build"));
 
-export { app };
+//Static files
+
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static("client/build"));
+}
+
+//
+export default app;
