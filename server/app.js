@@ -11,8 +11,10 @@ import { log } from "console";
 
 const app = express();
 const __dirname = dirname(fileURLToPath(import.meta.url));
+app.set("views", join(__dirname, "../client/build"));
 
 // middlwares
+app.use(express.static(join(__dirname, "../client/build")));
 app.use(express.json());
 app.use(
   fileUpload({
@@ -23,8 +25,7 @@ app.use(
 
 // routes
 app.use(postsRoutes);
-
-app.set("views", join(__dirname, "../client/build"));
+console.log(join(__dirname, "../client/build"));
 
 //Static files
 
