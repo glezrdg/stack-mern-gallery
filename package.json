@@ -7,9 +7,6 @@
   "scripts": {
     "dev": "nodemon server --watch server",
     "debug": "nodemon --inspect server --watch server",
-    "install-client": "cd ./client && npm install && npm run build",
-    "build-client": "npm run build --prefix client",
-    "heroku-postbuild": "npm run install-client",
     "start": "node ./server"
   },
   "keywords": [],
