@@ -1,5 +1,6 @@
 import express from "express";
 import fileUpload from "express-fileupload";
+import cors from "cors";
 
 // Routes
 import postsRoutes from "./routes/posts.routes.js";
@@ -14,6 +15,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 app.set("views", join(__dirname, "../client/build"));
 
 // middlwares
+app.use(cors());
 app.use(express.static(join(__dirname, "../client/build")));
 app.use(express.json());
 app.use(
