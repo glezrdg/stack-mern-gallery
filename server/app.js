@@ -6,17 +6,11 @@ import cors from "cors";
 import postsRoutes from "./routes/posts.routes.js";
 
 //variables
-import { dirname, join } from "path";
-import { fileURLToPath } from "url";
-import { log } from "console";
 
 const app = express();
-const __dirname = dirname(fileURLToPath(import.meta.url));
-app.set("views", join(__dirname, "../client/build"));
 
 // middlwares
 app.use(cors());
-app.use(express.static(join(__dirname, "../client/build")));
 app.use(express.json());
 app.use(
   fileUpload({
@@ -27,7 +21,6 @@ app.use(
 
 // routes
 app.use(postsRoutes);
-console.log(join(__dirname, "../client/build"));
 
 //Static files
 
